@@ -15,6 +15,7 @@ RUN nix-env -i /nix/store/681354n3k44r8z90m35hm8945vsp95h1-glibc-2.27
 
 COPY asldobjdump.nix /usr/src/asldobjdump.nix
 COPY shell.nix /usr/src/shell.nix
+COPY sgxsdk.nix /usr/src/sgxsdk.nix
 COPY nix /usr/src/nix
 
 WORKDIR /usr/src
