@@ -174,17 +174,31 @@ Unpack the Rust SGX SDK source code:
 
 ```shell
 [nix-shell:/usr/src]# unpackPhase
+```
+
+This should output something similar to:
+
+```shell
 unpacking source archive /nix/store/msvp3cfv2d8h0r9dhb2mqypkhil0nzra-source
 source root is source
 ```
 
-Go into the directory where the Rust SGX SDK source code has been unpacked,
-and build the enclave:
+Go into the directory where the Rust SGX SDK source code has been unpacked:
+
 
 ```shell
 [nix-shell:/usr/src]# cd source/
-[nix-shell:/usr/src/source]# buildPhase
+```
 
+Build the enclave:
+
+```
+[nix-shell:/usr/src/source]# buildPhase
+```
+
+The end of the output should be similar to:
+
+```shell
 ...
 
 GEN  =>  enclave/Enclave_t.c enclave/Enclave_t.h app/Enclave_u.c app/Enclave_u.h
