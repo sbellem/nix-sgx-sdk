@@ -91,6 +91,14 @@ SIGN =>  enclave.signed.so
 4328970ec560704b259a301979f0c4963718b0a4e55d313cce070d2589dfdd0b  enclave.signed.so
 ```
 
+```shell
+[nix-shell:/usr/src/result/sgxsdk/SampleCode/SampleEnclave]# sha256sum enclave.so
+a1396af1c9014bf78d7c706bf35889aaa66aa2419665691d3b362c2759ff121f  enclave.so
+
+[nix-shell:/usr/src/result/sgxsdk/SampleCode/SampleEnclave]# sha256sum enclave.signed.so 
+104738dfbd53d82619c5c512ea998ba46861eb4291a0ad8ff4121b1d9b3cfbc4  enclave.signed.so
+```
+
 Compile and run the local attestation sample in simulation mode:
 
 ```shell
@@ -384,4 +392,12 @@ sed -n '/metadata->magic_num/,/metadata->enclave_css.header.module_vendor/p;/met
 
 ```shell
 diff dev_metadata.txt audit_metadata.txt
+```
+
+```shell
+[nix-shell:/usr/src/source/samplecode/helloworld]# sha256sum enclave/enclave.so
+752711e32a43aff2363234f36bcce3fd54dbd3aa97f97ab37d1b268044913dd8  enclave/enclave.so
+
+[nix-shell:/usr/src/source/samplecode/helloworld]# sha256sum bin/dev.enclave.signed.so
+d27994d4af3bc1d1651ba68b02c867230d6a72f20ceaf6b2d8290c49e68a22a7  bin/dev.enclave.signed.so
 ```

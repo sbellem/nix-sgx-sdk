@@ -18,9 +18,7 @@ stdenv.mkDerivation {
   #};
   buildInputs = [ bison flex gettext libbfd libiberty libopcodes texinfo zlib ];
   configureFlags = [
-    #"--prefix=/usr/local"
     "--enable-shared"
-    #"--disable-static"
     "--enable-64-bit-bfd"
     "--with-system-zlib"
     "--disable-werror"
