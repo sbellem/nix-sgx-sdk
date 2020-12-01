@@ -10,6 +10,7 @@ services:
       - ./sgxsdk.nix:/usr/src/sgxsdk.nix
       - ./shell.nix:/usr/src/shell.nix
       - ./nix:/usr/src/nix
+      - ./build-archives:/usr/src/build-archives
   nix-rust-sgx-sdk:
     image: nix-rust-sgx-sdk
     build:
