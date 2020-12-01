@@ -5,7 +5,8 @@ RUN set -ex \
         \
         && mkdir /etc/nix \
         && echo "sandbox = false" >> /etc/nix/nix.conf \
-        && nix-channel --add https://nixos.org/channels/nixos-20.03 nixpkgs \
+        && nix-channel --add \
+            https://releases.nixos.org/nixos/20.03/nixos-20.03.3263.db46d7b20ad nixpkgs \
         && nix-channel --update
 
 # FIXME For now, must install glibc from another nixpkgs revision, so
