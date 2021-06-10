@@ -27,9 +27,7 @@ let
 
 in
 stdenvNoCC.mkDerivation {
-#stdenv.mkDerivation {
   inherit ipp_crypto binutils235 glibc227;
-  #inherit ipp_crypto binutils235;
   name = "sgxsdk";
   src = fetchFromGitHub {
     owner = "sbellem";
@@ -61,8 +59,6 @@ stdenvNoCC.mkDerivation {
     # FIXME For now, must get glibc from another nixpkgs revision.
     # See https://github.com/intel/linux-sgx/issues/612
     glibc227
-    #glibc
-    #gcc
     gcc8
     gnumake
     texinfo
@@ -83,7 +79,6 @@ stdenvNoCC.mkDerivation {
   postBuild = ''
     echo -e 'no\n'$out | ./linux/installer/bin/sgx_linux_x64_sdk_*.bin
     '';
-
   dontFixup = true;
   shellHook = ''echo "SGX SDK enviroment"'';
 }
