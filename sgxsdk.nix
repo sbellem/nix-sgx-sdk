@@ -27,6 +27,7 @@ stdenvNoCC.mkDerivation {
   preBuild = ''
     export BINUTILS_DIR=$binutils/bin
     '';
+  nativeBuildInputs = [ gcc ];
   buildInputs = [
     binutils
     autoconf
@@ -43,7 +44,7 @@ stdenvNoCC.mkDerivation {
     #glibc227
     #gcc8
     #glibc
-    gcc
+    #gcc
     gnumake
     texinfo
     bison
