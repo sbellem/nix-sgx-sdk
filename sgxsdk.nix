@@ -8,13 +8,13 @@ let
   };
 
   # for binutils 2.35.1
-  unstablepkgs = import (builtins.fetchGit {
-    name = "nixpkgs-unstable";
+  pkgs2105 = import (builtins.fetchGit {
+    name = "nixos-21.05-small";
     url = "https://github.com/NixOS/nixpkgs/";
-    ref = "refs/heads/nixpkgs-unstable";
-    rev = "bed08131cd29a85f19716d9351940bdc34834492";
+    ref = "refs/heads/release-21.05";
+    rev = "86d8a4876235f9600439401efad8b957ea3a5c26";
   }) {};
-  binutils235 = unstablepkgs.binutils;
+  binutils235 = pkgs2105.binutils;
 
   # for glibc 2.27
   pkgs1809 = import (builtins.fetchGit {
