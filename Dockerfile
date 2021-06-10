@@ -18,6 +18,7 @@ FROM nixpkgs/nix@sha256:4a35708f2014578f399719067714362a73c3a4d895dc070ced761044
 #            https://releases.nixos.org/nixos/20.03/nixos-20.03.3263.db46d7b20ad nixpkgs \
 #        && nix-channel --update
 
+RUN echo $NIX_PATH
 COPY shell.nix /usr/src/shell.nix
 COPY sgxsdk.nix /usr/src/sgxsdk.nix
 COPY nix /usr/src/nix

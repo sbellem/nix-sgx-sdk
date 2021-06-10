@@ -2,10 +2,10 @@
 with pkgs;
 
 let
-  ipp_crypto = fetchurl {
-    url = "https://download.01.org/intel-sgx/sgx-linux/2.13.3/optimized_libs_2.13.3.tar.gz";
-    sha256 = "f46aceac799e546e5c01e484d7f7c01b34c1e1d79469600f86da2bd5b3ce7ad4";
-  };
+  #ipp_crypto = fetchurl {
+  #  url = "https://download.01.org/intel-sgx/sgx-linux/2.13.3/optimized_libs_2.13.3.tar.gz";
+  #  sha256 = "f46aceac799e546e5c01e484d7f7c01b34c1e1d79469600f86da2bd5b3ce7ad4";
+  #};
 
   # for binutils 2.35.1
   pkgs2105 = import (builtins.fetchGit {
@@ -15,6 +15,7 @@ let
     rev = "86d8a4876235f9600439401efad8b957ea3a5c26";
   }) {};
   binutils235 = pkgs2105.binutils;
+  nasm215 = pkgs2105.nasm;
 
   # for glibc 2.27
   pkgs1809 = import (builtins.fetchGit {
@@ -27,7 +28,8 @@ let
 
 in
 stdenvNoCC.mkDerivation {
-  inherit ipp_crypto binutils235 glibc227;
+  #inherit ipp_crypto binutils235 glibc227;
+  inherit binutils235 glibc227 nasm215;
   name = "sgxsdk";
   src = fetchFromGitHub {
     owner = "sbellem";
@@ -38,12 +40,16 @@ stdenvNoCC.mkDerivation {
     sha256 = "0sr6109d589vq5xc7pig5752i9yk5dnlsr1ivj24y8l2vxr7gv6w";
     fetchSubmodules = true;
   };
-  postUnpack = ''
-    tar -C $sourceRoot -xvf $ipp_crypto
-    '';
+  #postUnpack = ''
+  #  tar -C $sourceRoot -xvf $ipp_crypto
+  #  '';
   dontConfigure = true;
   preBuild = ''
     export BINUTILS_DIR=$binutils235/bin
+    cd external/ippcp_internal/
+    export NIX_PATH=nixpkgs=/nix/store/4lbr6as55rlgs7a73b06irrazimkg5jc-fake_nixpkgs
+    make
+    cd ../..
     '';
   buildInputs = [
     binutils235
@@ -72,9 +78,11 @@ stdenvNoCC.mkDerivation {
     git
     # TODO is this needed?
     protobuf
+    nasm215
   ];
   #propagatedBuildInputs = [ gcc8 ];
-  buildFlags = ["sdk_install_pkg"];
+  #buildFlags = ["sdk_install_pkg"];
+  buildFlags = ["sdk_install_pkg_no_mitigation"];
   dontInstall = true;
   postBuild = ''
     echo -e 'no\n'$out | ./linux/installer/bin/sgx_linux_x64_sdk_*.bin
