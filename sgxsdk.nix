@@ -27,7 +27,8 @@ stdenvNoCC.mkDerivation {
   preBuild = ''
     export BINUTILS_DIR=$binutils/bin
     '';
-  nativeBuildInputs = [ gcc ];
+  #nativeBuildInputs = [ gcc ];
+  #nativeBuildInputs = [ gcc, gnum4 ];
   buildInputs = [
     binutils
     autoconf
@@ -44,7 +45,7 @@ stdenvNoCC.mkDerivation {
     #glibc227
     #gcc8
     #glibc
-    #gcc
+    gcc
     gnumake
     texinfo
     bison
@@ -60,8 +61,8 @@ stdenvNoCC.mkDerivation {
     #nasm215
   ];
   #propagatedBuildInputs = [ gcc8 ];
-  buildFlags = ["sdk_install_pkg"];
-  #buildFlags = ["sdk_install_pkg_no_mitigation"];
+  #buildFlags = ["sdk_install_pkg"];
+  buildFlags = ["sdk_install_pkg_no_mitigation"];
   dontInstall = true;
   postBuild = ''
     echo -e 'no\n'$out | ./linux/installer/bin/sgx_linux_x64_sdk_*.bin
