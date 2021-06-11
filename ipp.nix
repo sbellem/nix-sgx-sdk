@@ -1,13 +1,6 @@
 { sources ? import ./nix/sources.nix, pkgs ? import sources.nixpkgs { }}:
 with pkgs;
 
-let
-  #ipp_crypto = fetchurl {
-  #  url = "https://download.01.org/intel-sgx/sgx-linux/2.13.3/optimized_libs_2.13.3.tar.gz";
-  #  sha256 = "f46aceac799e546e5c01e484d7f7c01b34c1e1d79469600f86da2bd5b3ce7ad4";
-  #};
-
-in
 stdenvNoCC.mkDerivation {
   name = "ippcrypto";
   src = fetchFromGitHub {

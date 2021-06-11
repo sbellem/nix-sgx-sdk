@@ -5,27 +5,30 @@ services:
     image: nix-ippcrypto:local
     build:
       context: .
-      target: ipp
+      target: build
+      dockerfile: ipp.Dockerfile
     volumes:
-      - ./ipp.nix:/usr/src/ipp.nix
       - ./nix:/usr/src/nix
+      - ./ipp.nix:/usr/src/ipp.nix
   sgxsdk:
     image: nix-sgxsdk:local
     build:
       context: .
-      target: sgxsdk
+      target: build
+      dockerfile: sgxsdk.Dockerfile
     devices:
       - /dev/isgx
     volumes:
+      - ./nix:/usr/src/nix
       - ./sgxsdk.nix:/usr/src/sgxsdk.nix
       - ./shell.nix:/usr/src/shell.nix
-      - ./nix:/usr/src/nix
       - ./SampleCode:/tmp/app
   sgxsdk-with-prebuilt-ipp:
     image: nix-sgxsdk-with-prebuilt-ipp:local
     build:
       context: .
-      target: sgxsdk-with-prebuilt-ipp
+      target: build
+      dockerfile: sgxsdk-with-prebuilt-ipp.Dockerfile
     devices:
       - /dev/isgx
     volumes:
