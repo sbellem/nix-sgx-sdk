@@ -52,8 +52,8 @@ stdenvNoCC.mkDerivation {
 
     cd external/ippcp_internal/
     make clean; make
-    #make clean; make MITIGATION-CVE-2020-0551=LOAD
-    #make clean; make MITIGATION-CVE-2020-0551=CF
+    make clean; make MITIGATION-CVE-2020-0551=LOAD
+    make clean; make MITIGATION-CVE-2020-0551=CF
     
     runHook postBuild
     '';
@@ -62,6 +62,7 @@ stdenvNoCC.mkDerivation {
     cp -r ./lib $out/lib
     cp -r ./inc $out/inc
     cp -r ./license $out/license
+    ls -l ./inc/
   '';
   dontFixup = true;
   dontInstall = true;
