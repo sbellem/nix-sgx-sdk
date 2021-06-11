@@ -58,6 +58,7 @@ stdenvNoCC.mkDerivation {
     runHook postBuild
     '';
   postBuild = ''
+    mkdir -p $out
     cp -r ./lib $out/lib
     cp -r ./inc $out/inc
     cp -r ./license $out/license
