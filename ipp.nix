@@ -57,6 +57,11 @@ stdenvNoCC.mkDerivation {
     
     runHook postBuild
     '';
+  postBuild = ''
+    cp ./lib $out/lib
+    cp ./inc $out/inc
+    cp ./license $out/license
+  '';
   dontFixup = true;
   dontInstall = true;
 }
