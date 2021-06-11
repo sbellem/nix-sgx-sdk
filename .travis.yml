@@ -10,6 +10,8 @@ jobs:
     - name: sgx sdk with prebuilt ipp-crypto lib
       script: docker build --tag sgxsdk-with-prebuilt-ipp --file sgxsdk-with-prebuilt-ipp.Dockerfile .
     - name: sgx sdk with ipp-crypto built from source
-      script: docker build --tag sgxsdk --file sgxsdk.Dockerfile .
+      #script: docker build --tag sgxsdk --file sgxsdk.Dockerfile .
+      script: .ci/build-sgxsdk.sh
     - name: ipp-crypto library
-      script: docker build --tag ipp-crypto --file ipp.Dockerfile .
+      #script: docker build --tag ipp-crypto --file ipp.Dockerfile .
+      script: .ci/build-ipp.sh
