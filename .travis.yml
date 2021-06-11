@@ -1,19 +1,15 @@
+dist: bionic
+
+language: cpp
+
 services:
   - docker
 
-script:
-  - docker build --tag nixsgxsdk --file sgxsdk-with-prebuilt-ipp.Dockerfile .
-  - docker build --tag nixsgxsdk --file sgxsdk.Dockerfile .
-  - docker build --tag nixsgxsdk --file ipp.Dockerfile .
-
 jobs:
   include:
-    - stage: sgx sdk with prebuilt ipp-crypto lib
-      name: sgxsdk-with-prebuilt-ipp
+    - name: sgx sdk with prebuilt ipp-crypto lib
       script: docker build --tag sgxsdk-with-prebuilt-ipp --file sgxsdk-with-prebuilt-ipp.Dockerfile .
-    - stage: sgx sdk with ipp-crypto built from source
-      name: sgxsdk-with-ipp-built-from-source
+    - name: sgx sdk with ipp-crypto built from source
       script: docker build --tag sgxsdk --file sgxsdk.Dockerfile .
-    - stage: ipp-crypto library
-      name: ipp-crypto
+    - name: ipp-crypto library
       script: docker build --tag ipp-crypto --file ipp.Dockerfile .
