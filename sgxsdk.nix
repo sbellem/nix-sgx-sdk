@@ -50,9 +50,9 @@ stdenvNoCC.mkDerivation {
     #make clean; make MITIGATION-CVE-2020-0551=LOAD
     #make clean; make MITIGATION-CVE-2020-0551=CF
 
-    cp -r ./lib $sourceRoot/external/ippcp_internal/lib
-    cp -r ./inc $sourceRoot/external/ippcp_internal/inc
-    cp -r ./license $sourceRoot/external/ippcp_internal/license
+    #cp -r ./lib $PWD/$sourceRoot/external/ippcp_internal/lib
+    #cp -r ./inc $PWD/$sourceRoot/external/ippcp_internal/inc
+    #cp -r ./license $PWD/$sourceRoot/external/ippcp_internal/license
 
     cd ../..
     make clean; make sdk_install_pkg_no_mitigation
