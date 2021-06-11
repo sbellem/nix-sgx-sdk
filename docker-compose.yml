@@ -1,10 +1,19 @@
 version: '3.9'
 
 services:
+  ipp:
+    image: nix-ippcrypto:local
+    build:
+      context: .
+      target: ipp
+    volumes:
+      - ./ipp.nix:/usr/src/ipp.nix
+      - ./nix:/usr/src/nix
   sgxsdk:
     image: nix-sgxsdk:local
     build:
       context: .
+      target: sgxsdk
     devices:
       - /dev/isgx
     volumes:
@@ -12,6 +21,16 @@ services:
       - ./shell.nix:/usr/src/shell.nix
       - ./nix:/usr/src/nix
       - ./SampleCode:/tmp/app
+  sgxsdk-with-prebuilt-ipp:
+    image: nix-sgxsdk-with-prebuilt-ipp:local
+    build:
+      context: .
+      target: sgxsdk-with-prebuilt-ipp
+    devices:
+      - /dev/isgx
+    volumes:
+      - ./sgxsdk-with-prebuilt-ipp.nix:/usr/src/sgxsdk-with-prebuilt-ipp.nix
+      - ./nix:/usr/src/nix
   rust-sgxsdk:
     image: nix-rust-sgx-sdk
     build:

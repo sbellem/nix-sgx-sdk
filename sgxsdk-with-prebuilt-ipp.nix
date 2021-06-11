@@ -1,7 +1,15 @@
 { sources ? import ./nix/sources.nix, pkgs ? import sources.nixpkgs { }}:
 with pkgs;
 
+let
+  ipp_crypto = fetchurl {
+    url = "https://download.01.org/intel-sgx/sgx-linux/2.13.3/optimized_libs_2.13.3.tar.gz";
+    sha256 = "f46aceac799e546e5c01e484d7f7c01b34c1e1d79469600f86da2bd5b3ce7ad4";
+  };
+
+in
 stdenvNoCC.mkDerivation {
+  inherit ipp_crypto;
   name = "sgxsdk";
   src = fetchFromGitHub {
     owner = "sbellem";
@@ -12,11 +20,10 @@ stdenvNoCC.mkDerivation {
     sha256 = "0sr6109d589vq5xc7pig5752i9yk5dnlsr1ivj24y8l2vxr7gv6w";
     fetchSubmodules = true;
   };
-  dontConfigure = true;
-  preBuild = ''
-    export BINUTILS_DIR=$binutils/bin
-    export NIX_PATH=nixpkgs=/nix/store/4lbr6as55rlgs7a73b06irrazimkg5jc-fake_nixpkgs
+  postUnpack = ''
+    tar -C $sourceRoot -xvf $ipp_crypto
     '';
+  dontConfigure = true;
   #nativeBuildInputs = [ gcc, gnum4 ];
   buildInputs = [
     binutils
@@ -40,24 +47,21 @@ stdenvNoCC.mkDerivation {
     python3
     nasm
   ];
+  preBuild = ''
+    export BINUTILS_DIR=$binutils/bin
+    '';
   #buildFlags = ["sdk_install_pkg"];
   #buildFlags = ["sdk_install_pkg_no_mitigation"];
   buildPhase = ''
     runHook preBuild
 
-    cd external/ippcp_internal/
-    make clean; make
-    #make clean; make MITIGATION-CVE-2020-0551=LOAD
-    #make clean; make MITIGATION-CVE-2020-0551=CF
-    cd ../..
-    make clean; make sdk_install_pkg_no_mitigation
+    make sdk_install_pkg_no_mitigation
 
     runHook postBuild
     '';
-  dontInstall = true;
   postBuild = ''
     echo -e 'no\n'$out | ./linux/installer/bin/sgx_linux_x64_sdk_*.bin
     '';
+  dontInstall = true;
   dontFixup = true;
-  shellHook = ''echo "SGX SDK enviroment"'';
 }
