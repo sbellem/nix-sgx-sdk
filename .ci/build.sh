@@ -3,7 +3,7 @@
 # Acknowledgement of source: https://stackoverflow.com/a/26082445/2769475
 set -e
 
-thing=${1:-sgxsdk}
+nix_derivation=${1}
 
 export PING_SLEEP=30s
 export WORKDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -28,8 +28,10 @@ trap 'error_handler' ERR
 bash -c "while true; do echo \$(date) - building ...; sleep $PING_SLEEP; done" &
 PING_LOOP_PID=$!
 
-# your_build_command_1 >> $BUILD_OUTPUT 2>&1
-docker build --tag ${thing} --file ${thing}.Dockerfile . >> $BUILD_OUTPUT 2>&1
+docker build \
+    --tag ${nix_derivation} \
+    --build-arg nix_derivation=${nix_derivation} . \
+    >> $BUILD_OUTPUT 2>&1
 
 # The build finished without returning an error so dump a tail of the output
 dump_output
