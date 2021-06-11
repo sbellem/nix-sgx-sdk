@@ -45,12 +45,15 @@ stdenvNoCC.mkDerivation {
 
     cd external/ippcp_internal/
     make clean; make
-    #make clean; make MITIGATION-CVE-2020-0551=LOAD
-    #make clean; make MITIGATION-CVE-2020-0551=CF
+    ls -l ./inc
+    make clean; make MITIGATION-CVE-2020-0551=LOAD
+    ls -l ./inc
+    make clean; make MITIGATION-CVE-2020-0551=CF
+    ls -l ./inc
     cd ../..
 
-    make sdk_install_pkg_no_mitigation
-    #make sdk_install_pkg
+    #make sdk_install_pkg_no_mitigation
+    make sdk_install_pkg
 
     runHook postBuild
     '';
