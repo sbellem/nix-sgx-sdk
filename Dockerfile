@@ -13,6 +13,6 @@ WORKDIR /usr/src
 COPY nix nix
 
 FROM base as build
-ARG nix_derivation sgxsdk.nix
+ARG nix_derivation=sgxsdk.nix
 COPY ${nix_derivation} ${nix_derivation}
 RUN nix-build --quiet ${nix_derivation}
