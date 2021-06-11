@@ -23,4 +23,4 @@ COPY nix nix
 
 FROM base as build
 COPY sgxsdk.nix sgxsdk.nix
-RUN nix-build --verbose 0 sgxsdk.nix
+RUN nix-build --quiet sgxsdk.nix

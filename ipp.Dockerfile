@@ -23,4 +23,4 @@ COPY nix nix
 COPY ipp.nix ipp.nix
 
 FROM base as build
-RUN nix-build --verbose 0 ipp.nix
+RUN nix-build --quiet ipp.nix
