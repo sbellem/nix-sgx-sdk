@@ -6,16 +6,15 @@ stdenvNoCC.mkDerivation {
   src = fetchFromGitHub {
     owner = "sbellem";
     repo = "linux-sgx";
-    rev = "d55fe39d6e5c1839623a51f8bcedddee68b0341b";
+    rev = "68fed00c67532cf5be7df8dac5f9d13b3c25e9d8";
     # Command to get the sha256 hash (note the --fetch-submodules arg):
-    # nix run -f '<nixpkgs>' nix-prefetch-github -c nix-prefetch-github --fetch-submodules --rev d55fe39d6e5c1839623a51f8bcedddee68b0341b sbellem linux-sgx
-    sha256 = "1i945pvr6caibjmp7m3ax7wn6xhm7d5z7x5hi40c7gfqd8l5l3xr";
+    # nix run -f '<nixpkgs>' nix-prefetch-github -c nix-prefetch-github --fetch-submodules --rev 68fed00c67532cf5be7df8dac5f9d13b3c25e9d8 sbellem linux-sgx
+    sha256 = "08a6y35s3rlvhcbd8zxqkw7d5vknb5b3mw0wa1wis6y7av5pskx2";
     fetchSubmodules = true;
   };
   dontConfigure = true;
   preBuild = ''
     export BINUTILS_DIR=$binutils/bin
-    export NIX_PATH=nixpkgs=/nix/store/4lbr6as55rlgs7a73b06irrazimkg5jc-fake_nixpkgs
     '';
   #nativeBuildInputs = [ gcc, gnum4 ];
   buildInputs = [
