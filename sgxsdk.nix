@@ -58,5 +58,4 @@ stdenvNoCC.mkDerivation {
     echo -e 'no\n'$out | ./linux/installer/bin/sgx_linux_x64_sdk_*.bin
     '';
   dontFixup = true;
-  shellHook = ''echo "SGX SDK enviroment"'';
 }

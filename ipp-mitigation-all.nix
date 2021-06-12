@@ -2,7 +2,7 @@
 with pkgs;
 
 stdenvNoCC.mkDerivation {
-  name = "ippcrypto-nomitigation";
+  name = "ippcrypto-mitigation-load";
   src = fetchFromGitHub {
     owner = "sbellem";
     repo = "linux-sgx";
@@ -42,7 +42,9 @@ stdenvNoCC.mkDerivation {
     runHook preBuild
 
     cd external/ippcp_internal/
-    make
+    make MITIGATION-CVE-2020-0551=LOAD
+    make clean
+    make MITIGATION-CVE-2020-0551=CF
     
     runHook postBuild
     '';

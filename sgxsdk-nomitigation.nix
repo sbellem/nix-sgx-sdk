@@ -6,12 +6,12 @@ stdenvNoCC.mkDerivation {
   src = fetchFromGitHub {
     owner = "sbellem";
     repo = "linux-sgx";
-    #rev = "6e1436a4dd3236a07f1c6cfba7b2eade1b82a1a3";
-    rev = "d55fe39d6e5c1839623a51f8bcedddee68b0341b";
+    #rev = "d55fe39d6e5c1839623a51f8bcedddee68b0341b";
+    rev = "328bb7c81eaed75bf53e214eda0411e86264171d";
     # Command to get the sha256 hash (note the --fetch-submodules arg):
-    # nix run -f '<nixpkgs>' nix-prefetch-github -c nix-prefetch-github --fetch-submodules --rev d55fe39d6e5c1839623a51f8bcedddee68b0341b sbellem linux-sgx
-    #sha256 = "0sr6109d589vq5xc7pig5752i9yk5dnlsr1ivj24y8l2vxr7gv6w";
-    sha256 = "1i945pvr6caibjmp7m3ax7wn6xhm7d5z7x5hi40c7gfqd8l5l3xr";
+    # nix run -f '<nixpkgs>' nix-prefetch-github -c nix-prefetch-github --fetch-submodules --rev 328bb7c81eaed75bf53e214eda0411e86264171d sbellem linux-sgx
+    #sha256 = "1i945pvr6caibjmp7m3ax7wn6xhm7d5z7x5hi40c7gfqd8l5l3xr";
+    sha256 = "1ij6csvcn66frqvnlv4r1vcspw7qlnzblghw7rfbbisx5xxfni6f";
     fetchSubmodules = true;
   };
   #nativeBuildInputs = [ gcc, gnum4 ];
@@ -38,10 +38,8 @@ stdenvNoCC.mkDerivation {
     nasm
   ];
   dontConfigure = true;
-  # NIX_PATH=nixpkgs=/nix/store/h9gyw7rpm3m0n30xpyr1qgrsnrgh6zi0-fake_nixpkgs
   preBuild = ''
     export BINUTILS_DIR=$binutils/bin
-    export NIX_PATH=nixpkgs=/nix/store/4lbr6as55rlgs7a73b06irrazimkg5jc-fake_nixpkgs
     '';
   buildPhase = ''
     runHook preBuild
