@@ -10,6 +10,7 @@ services:
     volumes:
       - ./nix:/usr/src/nix
       - ./ipp.nix:/usr/src/ipp.nix
+
   sgxsdk:
     image: nix-sgxsdk:local
     build:
@@ -23,6 +24,21 @@ services:
       - ./sgxsdk.nix:/usr/src/sgxsdk.nix
       - ./shell.nix:/usr/src/shell.nix
       - ./SampleCode:/tmp/app
+
+  sgxsdk-nomitigation:
+    image: nix-sgxsdk-nomitigation:local
+    build:
+      context: .
+      target: build
+      dockerfile: Dockerfile
+      args:
+        nix_derivation: sgxsdk-nomitigation.nix
+    devices:
+      - /dev/isgx
+    volumes:
+      - ./nix:/usr/src/nix
+      - ./sgxsdk-nomitigation.nix:/usr/src/sgxsdk-nomitigation.nix
+
   sgxsdk-with-prebuilt-ipp:
     image: nix-sgxsdk-with-prebuilt-ipp:local
     build:
@@ -34,6 +50,20 @@ services:
     volumes:
       - ./sgxsdk-with-prebuilt-ipp.nix:/usr/src/sgxsdk-with-prebuilt-ipp.nix
       - ./nix:/usr/src/nix
+  sgxsdk-nomitigation-with-prebuilt-ipp:
+    image: sgxsdk-nomitigation-with-prebuilt-ipp:local
+    build:
+      context: .
+      target: build
+      dockerfile: Dockerfile
+      args:
+        nix_derivation: sgxsdk-nomitigation-with-prebuilt-ipp.nix
+    devices:
+      - /dev/isgx
+    volumes:
+      - ./sgxsdk-nomitigation-with-prebuilt-ipp.nix:/usr/src/sgxsdk-nomitigation-with-prebuilt-ipp.nix
+      - ./nix:/usr/src/nix
+
   rust-sgxsdk:
     image: nix-rust-sgx-sdk
     build:

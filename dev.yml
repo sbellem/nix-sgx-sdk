@@ -1,0 +1,37 @@
+version: '3.9'
+
+services:
+  ipp:
+    image: ippcrypto:nix-dev
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    volumes:
+      - ./nix:/usr/src/nix
+      - ./ipp.nix:/usr/src/ipp.nix
+
+  sgxsdk:
+    image: sgxsdk:nix-dev
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    devices:
+      - /dev/isgx
+    volumes:
+      - ./nix:/usr/src/nix
+      - ./sgxsdk.nix:/usr/src/sgxsdk.nix
+      - ./shell.nix:/usr/src/shell.nix
+      - ./SampleCode:/tmp/app
+
+  sgxsdk-nomitigation:
+    image: sgxsdk-nomitigation:nix-dev
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+      args:
+        nix_derivation: sgxsdk-nomitigation.nix
+    devices:
+      - /dev/isgx
+    volumes:
+      - ./nix:/usr/src/nix
+      - ./sgxsdk-nomitigation.nix:/usr/src/sgxsdk-nomitigation.nix

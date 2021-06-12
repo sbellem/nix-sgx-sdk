@@ -38,6 +38,7 @@ stdenvNoCC.mkDerivation {
     nasm
   ];
   dontConfigure = true;
+  # NIX_PATH=nixpkgs=/nix/store/h9gyw7rpm3m0n30xpyr1qgrsnrgh6zi0-fake_nixpkgs
   preBuild = ''
     export BINUTILS_DIR=$binutils/bin
     export NIX_PATH=nixpkgs=/nix/store/4lbr6as55rlgs7a73b06irrazimkg5jc-fake_nixpkgs

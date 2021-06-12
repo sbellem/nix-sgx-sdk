@@ -17,10 +17,8 @@ stdenvNoCC.mkDerivation {
     rev = "6e1436a4dd3236a07f1c6cfba7b2eade1b82a1a3";
     # Command to get the sha256 hash (note the --fetch-submodules arg):
     # nix run -f '<nixpkgs>' nix-prefetch-github -c nix-prefetch-github --fetch-submodules --rev 6e1436a4dd3236a07f1c6cfba7b2eade1b82a1a3 sbellem linux-sgx
-    #sha256 = "0sr6109d589vq5xc7pig5752i9yk5dnlsr1ivj24y8l2vxr7gv6w";
-    #fetchSubmodules = true;
-    sha256 = "1q2p4xcc80zml61y17f807fl162sjlclbvv8gmigkggc6xry6avn";
-    #fetchSubmodules = true;
+    sha256 = "0sr6109d589vq5xc7pig5752i9yk5dnlsr1ivj24y8l2vxr7gv6w";
+    fetchSubmodules = true;
   };
   postUnpack = ''
     tar -C $sourceRoot -xvf $ipp_crypto
