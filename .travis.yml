@@ -11,7 +11,7 @@ jobs:
       script: .ci/build.sh sgxsdk-with-prebuilt-ipp.nix
     - name: sgx sdk no mitigation with ipp-crypto built from source
       script: .ci/build.sh sgxsdk-nomitigation.nix
-    - name: sgx sdk with ipp-crypto built from source
-      script: .ci/build-sgxsdk.sh
+    #- name: sgx sdk with ipp-crypto built from source
+    #  script: .ci/build.sh sgxsdk.nix
     - name: ipp-crypto library no mitigation
       script: .ci/build.sh ipp-nomitigation.nix
