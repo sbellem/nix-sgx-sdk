@@ -1,12 +1,3 @@
-#FROM nixpkgs/nix:nixos-19.09
-#FROM nixpkgs/nix@sha256:4a35708f2014578f399719067714362a73c3a4d895dc070ced761044f3476631
-
-#FROM nixpkgs/nix:nixos-20.03
-#FROM nixpkgs/nix@sha256:7c185d8de541589e7caa795a36aa9352fd8bd8a94ee298946433dedb7adeb315
-
-#FROM nixpkgs/nix:nixos-20.09
-#FROM nixpkgs/nix@sha256:9eee633905248e4800a308a5af38fcb5d58d9505dc6c1268196ae83757843a79
-
 # nixpkgs/nix:latest
 FROM nixpkgs/nix@sha256:c7ab99ed60cc587ac784742e2814303331283cca121507a1d4c0dd21ed1bdf83 as base
 

@@ -43,9 +43,11 @@ stdenvNoCC.mkDerivation {
     runHook preBuild
 
     cd external/ippcp_internal/
-    make clean; make
-    make clean; make MITIGATION-CVE-2020-0551=LOAD
-    make clean; make MITIGATION-CVE-2020-0551=CF
+    make
+    make clean
+    make MITIGATION-CVE-2020-0551=CF
+    make clean
+    make MITIGATION-CVE-2020-0551=LOAD
     cd ../..
 
     make sdk_install_pkg
