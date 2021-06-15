@@ -1,4 +1,6 @@
 # nix-sgx-sdk
+[![Build Linux SGX SDK](https://github.com/sbellem/nix-sgx-sdk/actions/workflows/sgxsdk.yml/badge.svg?branch=dev)](https://github.com/sbellem/nix-sgx-sdk/actions/workflows/sgxsdk.yml)
+
 Experimental nix derivation for Intel's SGX SDK.
 
 This a work-in-progress.
