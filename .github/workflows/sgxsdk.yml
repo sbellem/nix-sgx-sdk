@@ -9,6 +9,38 @@ on:
   workflow_dispatch:
 
 jobs:
+  build_nomitigation_cachix:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Install nix from cachix
+        uses: cachix/install-nix-action@v13
+        with:
+          nix_path: nixpkgs=channel:nixos-21.05
+      - name: Install cachix
+        uses: cachix/cachix-action@v10
+        with:
+          name: gluon
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+      - run: nix-build sgxsdk-nomitigation.nix
+
+  build_all_cachix:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Install nix from cachix
+        uses: cachix/install-nix-action@v13
+        with:
+          nix_path: nixpkgs=channel:nixos-21.05
+      - name: Install cachix
+        uses: cachix/cachix-action@v10
+        with:
+          name: gluon
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+      - run: nix-build sgxsdk.nix
+
   build_nomitigation:
     runs-on: ubuntu-latest
     steps:
