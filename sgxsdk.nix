@@ -56,6 +56,9 @@ stdenvNoCC.mkDerivation {
     '';
   dontInstall = true;
   postBuild = ''
+    echo $PWD
+    echo $sourceRoot
+    ls -l ./linux/installer/bin/
     echo -e 'no\n'$out | ./linux/installer/bin/sgx_linux_x64_sdk_*.bin
     '';
   dontFixup = true;
