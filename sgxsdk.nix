@@ -13,6 +13,11 @@ stdenvNoCC.mkDerivation {
     fetchSubmodules = true;
   };
   dontConfigure = true;
+  prePatch = ''
+    patchShebangs ./linux/installer/bin/build-installpkg.sh
+    patchShebangs ./linux/installer/common/sdk/createTarball.sh
+    patchShebangs ./linux/installer/common/sdk/install.sh
+    '';
   preBuild = ''
     export BINUTILS_DIR=$binutils/bin
     '';
@@ -54,11 +59,10 @@ stdenvNoCC.mkDerivation {
 
     runHook postBuild
     '';
-  dontInstall = true;
   postBuild = ''
-    echo $PWD
-    echo $sourceRoot
-    ls -l ./linux/installer/bin/
+    patchShebangs ./linux/installer/bin/sgx_linux_x64_sdk_*.bin
+    '';
+  installPhase = ''
     echo -e 'no\n'$out | ./linux/installer/bin/sgx_linux_x64_sdk_*.bin
     '';
   dontFixup = true;

@@ -21,7 +21,7 @@ jobs:
       - name: Install cachix
         uses: cachix/cachix-action@v10
         with:
-          name: gluon
+          name: pico
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
       - run: nix-build sgxsdk-nomitigation.nix
 
@@ -37,7 +37,7 @@ jobs:
       - name: Install cachix
         uses: cachix/cachix-action@v10
         with:
-          name: gluon
+          name: pico
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
       - run: nix-build sgxsdk.nix
 

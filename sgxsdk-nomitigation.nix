@@ -10,7 +10,11 @@ stdenvNoCC.mkDerivation {
     sha256 = "0znallianv3lp3y62cfdgp8gacpw516qg8cjxhz8bj5lv5qghchk";
     fetchSubmodules = true;
   };
-  #nativeBuildInputs = [ gcc, gnum4 ];
+  prePatch = ''
+    patchShebangs ./linux/installer/bin/build-installpkg.sh
+    patchShebangs ./linux/installer/common/sdk/createTarball.sh
+    patchShebangs ./linux/installer/common/sdk/install.sh
+    '';
   buildInputs = [
     binutils
     autoconf
@@ -24,7 +28,6 @@ stdenvNoCC.mkDerivation {
     gnum4
     openssl
     perl
-    #glibc
     gcc
     gnumake
     texinfo
@@ -52,11 +55,10 @@ stdenvNoCC.mkDerivation {
     runHook postBuild
     '';
   postBuild = ''
-    echo $PWD
-    echo $sourceRoot
-    ls -l ./linux/installer/bin/
+    patchShebangs ./linux/installer/bin/sgx_linux_x64_sdk_*.bin
+    '';
+  installPhase = ''
     echo -e 'no\n'$out | ./linux/installer/bin/sgx_linux_x64_sdk_*.bin
     '';
-  dontInstall = true;
   dontFixup = true;
 }
